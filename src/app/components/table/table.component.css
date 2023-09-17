@@ -1,0 +1,23 @@
+.table-link {
+    text-decoration: underline;
+    color: blue !important;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+
+th{
+    font-size: 20px !important;
+    font-weight: 600;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+}

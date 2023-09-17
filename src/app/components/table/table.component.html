@@ -1,0 +1,48 @@
+<div class="table-responsive">
+  <table mat-table matSort [dataSource]="data" class="mat-elevation-z8" >
+
+    <ng-container *ngFor="let col of columnInfo; let colIndex = index">
+      <ng-container [matColumnDef]="col.colName">
+        <ng-container *ngIf="col.hidden == undefined || col.hidden != true">
+          <ng-container *ngIf="headerRowNum == 1">
+              <ng-container *ngIf="col.headerType == undefined || col.headerType.typeName == DataTypeName.NORMAL; else headerTypeElse">
+                <th [style]="col.width? 'width:'+ col.width: ''" mat-header-cell *matHeaderCellDef class="text-center">{{col.title}} </th> 
+              </ng-container>
+              <ng-template #headerTypeElse>
+                <ng-container [ngSwitch]="col.headerType?.typeName">
+                  <ng-container *ngSwitchCase="DataTypeName.SORT"><th [style]="col.width? 'width:'+ col.width: ''" (click)="onClickSortHeader(col)" mat-header-cell mat-sort-header *matHeaderCellDef class="text-center">{{col.title}}</th></ng-container>
+                  <ng-container *ngSwitchCase="DataTypeName.CHECKBOX"><th [style]="col.width? 'width:'+ col.width: ''" mat-header-cell *matHeaderCellDef class="text-center">
+                    <mat-checkbox [checked]="col.headerType?.isCheckAll" [indeterminate]="someChecked(col)" (change)="setAll(col, $event.checked)"></mat-checkbox></th></ng-container>
+                </ng-container>
+              </ng-template>
+          </ng-container>
+          <ng-container [ngSwitch]="col.dataType.typeName">
+            <ng-container *ngSwitchCase="DataTypeName.NORMAL"><td mat-cell *matCellDef="let element"> {{element[col.colName]}} </td></ng-container>
+            <ng-container *ngSwitchCase="DataTypeName.BUTTON_LINK"><td mat-cell *matCellDef="let element; let rowIndex = index" class="text-center"> <a mat-button class="table-link" (click)="onClick(col,element, rowIndex)" target="_blank">{{element[col.colName]}}</a> </td></ng-container>
+            <ng-container *ngSwitchCase="DataTypeName.INPUT_NUMBER"><td mat-cell *matCellDef="let element; let rowIndex = index" class="text-center"> <app-input-number [(ngInput)]="element[col.colName]" (ngInputChange)="onChange(col, element, element[col.colName])"></app-input-number> </td></ng-container>
+            <ng-container *ngSwitchCase="DataTypeName.INPUT_TEXT"><td mat-cell *matCellDef="let element; let rowIndex = index" class="text-center"> <app-input-text [(ngInput)]="element[col.colName]" (ngInputChange)="onChange(col, element, element[col.colName])"></app-input-text> </td></ng-container>
+            <ng-container *ngSwitchCase="DataTypeName.TEXTAREA"><td mat-cell *matCellDef="let element; let rowIndex = index" class="text-center"> <app-input-textarea [(ngInput)]="element[col.colName]" (ngInputChange)="onChange(col, element, element[col.colName])"></app-input-textarea> </td></ng-container>
+            <ng-container *ngSwitchCase="DataTypeName.CHECKBOX"><td mat-cell *matCellDef="let element; let rowIndex = index" class="text-center">  <mat-checkbox [(ngModel)]="element[col.colName]" (ngModelChange)="updateAllChecked(col)"></mat-checkbox> </td></ng-container>
+            <ng-container *ngSwitchCase="DataTypeName.DATEPICKER"><td mat-cell *matCellDef="let element; let rowIndex = index" class="text-center"> <app-input-date [(ngDate)]="element[col.colName]" (ngDateChange)="onChange(col, element, element[col.colName])"></app-input-date> </td></ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<div *ngIf="pagination" class="row">
+  <mat-paginator #paginator
+                 class="demo-paginator"
+                 (page)="handlePageEvent($event)"
+                 [length]="pagination.totalRecords"
+                 [pageSize]="pagination.pageSize"
+                 [disabled]="false"
+                 [showFirstLastButtons]="true"
+                 [pageSizeOptions]="[5, 15, 20]"
+                 [hidePageSize]="false"
+                 [pageIndex]="pagination.pageNum - 1"
+                 aria-label="Select page">
+  </mat-paginator>
+</div>
