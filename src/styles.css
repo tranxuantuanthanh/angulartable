@@ -1,8 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; font-size: 1rem; }
 
-.mdc-data-table__cell, .mdc-data-table__header-cell {
-    padding: 4px 4px 4px 4px !important;
+.h-10{
+    height: 10%;
+}
+
+.h-90{
+    height: 90%;
+}
+
+.h-7{
+    height: 7%;
+}
+
+.h-93{
+    height: 93%;
 }

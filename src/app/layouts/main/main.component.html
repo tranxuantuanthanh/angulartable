@@ -1,0 +1,9 @@
+<app-header class="main-header h-7" [(isSideBarShow)]="isSideBarShow"></app-header>
+<mat-drawer-container class="w-100 h-93">
+    <mat-drawer mode="side" [opened]="isSideBarShow" class="d-sm-block"
+        [ngClass]="{'d-none' : !isSideBarShow, 'col-12': isSideBarShow, 'col-md-3': isSideBarShow, 'col-lg-2': isSideBarShow}"><app-sidebar></app-sidebar></mat-drawer>
+    <mat-drawer-content class="d-sm-block col-md-9 col-lg-10"
+        [ngClass]="{'d-none' : isSideBarShow,  'col-12': !isSideBarShow, 'col-md-9': isSideBarShow, 'col-lg-10': isSideBarShow}">
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

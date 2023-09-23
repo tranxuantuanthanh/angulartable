@@ -8,7 +8,7 @@ table {
     width: 100%;
 }
 
-th{
+th {
     font-size: 20px !important;
     font-weight: 600;
 }
@@ -20,4 +20,14 @@ th.mat-sort-header-sorted {
 ::ng-deep .mat-sort-header-container {
     display: flex;
     justify-content: center;
+}
+
+.mdc-data-table__cell,
+.mdc-data-table__header-cell {
+    padding: 4px 4px 4px 4px !important;
+}
+
+table thead{
+    position: sticky;
+    z-index: 100px;
 }

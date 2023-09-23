@@ -1,6 +1,5 @@
-<div class="table-responsive">
+<div class="table-responsive" [ngStyle]="{'height.px': maxHeight}">
   <table mat-table matSort [dataSource]="data" class="mat-elevation-z8" >
-
     <ng-container *ngFor="let col of columnInfo; let colIndex = index">
       <ng-container [matColumnDef]="col.colName">
         <ng-container *ngIf="col.hidden == undefined || col.hidden != true">
@@ -28,13 +27,16 @@
         </ng-container>
       </ng-container>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
 <div *ngIf="pagination" class="row">
+  <div class="col-md-6">
+
+  </div>
   <mat-paginator #paginator
-                 class="demo-paginator"
+                 class="col-md-6"
                  (page)="handlePageEvent($event)"
                  [length]="pagination.totalRecords"
                  [pageSize]="pagination.pageSize"

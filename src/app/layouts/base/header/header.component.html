@@ -1,0 +1,14 @@
+<mat-toolbar>
+    <span>My App</span>
+    <app-input-autocomplete class="ms-3 input-function"></app-input-autocomplete>
+    <button mat-icon-button (click)="isSideBarShowChange.emit(!isSideBarShow)">
+        <mat-icon>menu</mat-icon>
+      </button>
+    <span class="spacer"></span>
+    <button mat-icon-button class="favorite-icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
